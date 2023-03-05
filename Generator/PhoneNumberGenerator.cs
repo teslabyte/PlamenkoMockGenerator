@@ -10,7 +10,7 @@ namespace PlamenkoMockGenerator.Generator
     {
         string[] phoneNumberPrefixes = { "060", "061","062","063","064", "065", "066", "069" };
 
-        int[] generateNumbers()
+        int[] GenerateNumbers()
         {
             Random rnd = new Random();
             int first = rnd.Next(100, 999);
@@ -19,9 +19,9 @@ namespace PlamenkoMockGenerator.Generator
             return new int[] { prefix, first, second }; 
         }
         
-        public string getRandomPhoneNumber()
+        public string GetRandomPhoneNumber()
         {
-            int[] generatedRandom = generateNumbers();
+            int[] generatedRandom = GenerateNumbers();
 
             return phoneNumberPrefixes[generatedRandom[0]] + "-" + generatedRandom[1] + "-" + generatedRandom[2];
         }
