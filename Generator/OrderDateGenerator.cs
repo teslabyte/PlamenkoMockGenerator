@@ -16,9 +16,17 @@
             }
             else
             {
-                day = rnd.Next(day, 30);
-                month= rnd.Next(month, 12);
-                year = rnd.Next(year, 2024);
+                day = day + rnd.Next(1, 10);
+                if(day > 30)
+                {
+                    day = day - 30;
+                    month = month + 1;
+                }
+                if(month > 12)
+                {
+                    month = 1;
+                    year = year + 1;
+                }
                 string deliveredDate = day + "." + month + "." + year;
                 return new string[] { orderedDate, deliveredDate };
             }
