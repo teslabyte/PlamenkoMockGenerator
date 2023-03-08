@@ -6,5 +6,7 @@
         public string deliveredDate { get; set; }
         public string additionalOrderInfo { get; set; } = "-";
 
+        public string paidDate { get; set; }
+
     }
 }

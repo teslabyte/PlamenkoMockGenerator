@@ -37,6 +37,7 @@
                 CustomerOrder customerOrder = new CustomerOrder();
                 customerOrder.orderedDate = dates[0];
                 customerOrder.deliveredDate = dates[1];
+                customerOrder.paidDate = dates[2];
                 orders.Add(customerOrder);
             }
 
