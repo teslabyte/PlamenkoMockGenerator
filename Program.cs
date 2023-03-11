@@ -14,20 +14,35 @@ string[] allSurnames = File.ReadAllLines(Environment.CurrentDirectory + "\\Data\
 string[] allStreets = File.ReadAllLines(Environment.CurrentDirectory + "\\Data\\streets.txt");
 
 List<Customer> customers = new List<Customer>();
+List<CustomerOrder> orders = new List<CustomerOrder>();
 
-for(int i = 0; i < mockNumber; i++)
+CustomerGenerator cgen = new CustomerGenerator(allStreets, allNames, allSurnames);
+CustomerOrderGenerator cogen= new CustomerOrderGenerator();
+
+orders = cogen.GenerateCustomerOrders(mockNumber * 12);
+customers = cgen.GenerateCustomers(mockNumber);
+
+//Distribute orders to customers
+Random rnd = new Random();
+for(int i = 0; i < orders.Count; i++)
 {
-
-    CustomerGenerator cgen = new CustomerGenerator(i, allStreets, allNames, allSurnames);
-
-    customers.Add(cgen.GenerateCustomer());
-   
+    int rndCustomerId = rnd.Next(0, customers.Count);
+    customers[rndCustomerId].customerOrderIds.Add(i + 1);
 }
 
-FileInfo mockFile = new FileInfo(Environment.CurrentDirectory + "\\Mock Data\\mock.json");
-mockFile.Directory.Create();
+FileInfo mockCustomerFile = new FileInfo(Environment.CurrentDirectory + "\\Mock Data\\mock_customers.json");
+mockCustomerFile.Directory.Create();
 
-File.WriteAllText(mockFile.FullName, JsonSerializer.Serialize(customers, new JsonSerializerOptions
+File.WriteAllText(mockCustomerFile.FullName, JsonSerializer.Serialize(customers, new JsonSerializerOptions
+{
+    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+    WriteIndented = true
+}));
+
+FileInfo mockOrderFile = new FileInfo(Environment.CurrentDirectory + "\\Mock Data\\mock_orders.json");
+mockOrderFile.Directory.Create();
+
+File.WriteAllText(mockOrderFile.FullName, JsonSerializer.Serialize(orders, new JsonSerializerOptions
 {
     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
     WriteIndented = true
