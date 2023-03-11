@@ -2,48 +2,36 @@
 {
     internal class CustomerGenerator
     {
-        long customerId;
         string[] allStreets;
         string[] allNames;
         string[] allSurnames;
 
-        public CustomerGenerator(long customerId, string[] allStreets, string[] allNames, string[] allSurnames) {
-            this.customerId = customerId;
+        public CustomerGenerator(string[] allStreets, string[] allNames, string[] allSurnames) {
             this.allSurnames = allSurnames;
             this.allNames = allNames;
             this.allStreets = allStreets;
         }
-        public Customer GenerateCustomer()
+        public List<Customer> GenerateCustomers(long mockNumber)
         {
             AddressGenerator adgen = new AddressGenerator(allStreets);
             FullNameGenerator fnmgen = new FullNameGenerator(allNames, allSurnames);
             PhoneNumberGenerator pgen = new PhoneNumberGenerator();
             CustomerAdditionalInfoGenerator cadigen = new CustomerAdditionalInfoGenerator();
-            OrderDateGenerator odgen = new OrderDateGenerator();
-            Random rnd = new Random();
+            List<Customer> customers = new List<Customer>();
 
-            Customer customer = new Customer();
-            customer.customerId = customerId + 1;
-            customer.customerName = fnmgen.GetRandomFullName();
-            customer.customerAddress = adgen.GenerateRandomAddress();
-            customer.customerPhoneNumber = pgen.GetRandomPhoneNumber();
-            customer.customerAdditionalInfo = cadigen.GenerateCustomerAdditionalInfo();
-
-            int orderNum = rnd.Next(4, 20);
-            List<CustomerOrder> orders = new List<CustomerOrder>();
-            for (int j = 0; j < orderNum; j++)
+            for (int i = 0; i < mockNumber; i++)
             {
-                string[] dates = odgen.GenerateOrderDates();
-                CustomerOrder customerOrder = new CustomerOrder();
-                customerOrder.orderedDate = dates[0];
-                customerOrder.deliveredDate = dates[1];
-                customerOrder.paidDate = dates[2];
-                orders.Add(customerOrder);
+                Customer customer = new Customer();
+                customer.customerId = i + 1;
+                customer.customerName = fnmgen.GetRandomFullName();
+                customer.customerAddress = adgen.GenerateRandomAddress();
+                customer.customerPhoneNumber = pgen.GetRandomPhoneNumber();
+                customer.customerAdditionalInfo = cadigen.GenerateCustomerAdditionalInfo();
+                customer.customerOrderIds = new List<long>();
+                customers.Add(customer);
             }
 
-            customer.customerOrders = orders;
-
-            return customer;
+            return customers;
         }
     }
 }
