@@ -29,7 +29,7 @@
             customer.customerPhoneNumber = pgen.GetRandomPhoneNumber();
             customer.customerAdditionalInfo = cadigen.GenerateCustomerAdditionalInfo();
 
-            int orderNum = rnd.Next(1, 5);
+            int orderNum = rnd.Next(4, 20);
             List<CustomerOrder> orders = new List<CustomerOrder>();
             for (int j = 0; j < orderNum; j++)
             {

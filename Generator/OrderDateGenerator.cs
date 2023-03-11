@@ -14,7 +14,7 @@
 
             string deliveredDate = GenerateDate(ref day, ref month, ref year);
 
-            int del = rnd.Next(1, 10);
+            int del = rnd.Next(1, 11);
             if(del > 8)
             {
                 if(del == 9) return new string[] { orderedDate, "-", paidDate };
