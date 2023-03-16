@@ -27,22 +27,21 @@ Random rnd = new Random();
 for(int i = 0; i < orders.Count; i++)
 {
     int rndCustomerId = rnd.Next(0, customers.Count);
-    customers[rndCustomerId].customerOrderIds.Add(i + 1);
+    customers[rndCustomerId].customerOrders.Add(orders[i]);
+}
+
+foreach(Customer customer in customers)
+{
+    foreach(CustomerOrder cOrders in customer.customerOrders)
+    {
+        if (cOrders.deliveredDate == "-") customer.delivered = false;
+    }
 }
 
 FileInfo mockCustomerFile = new FileInfo(Environment.CurrentDirectory + "\\Mock Data\\mock_customers.json");
 mockCustomerFile.Directory.Create();
 
 File.WriteAllText(mockCustomerFile.FullName, JsonSerializer.Serialize(customers, new JsonSerializerOptions
-{
-    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-    WriteIndented = true
-}));
-
-FileInfo mockOrderFile = new FileInfo(Environment.CurrentDirectory + "\\Mock Data\\mock_orders.json");
-mockOrderFile.Directory.Create();
-
-File.WriteAllText(mockOrderFile.FullName, JsonSerializer.Serialize(orders, new JsonSerializerOptions
 {
     Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
     WriteIndented = true

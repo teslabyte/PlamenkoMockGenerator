@@ -27,7 +27,7 @@
                 customer.customerAddress = adgen.GenerateRandomAddress();
                 customer.customerPhoneNumber = pgen.GetRandomPhoneNumber();
                 customer.customerAdditionalInfo = cadigen.GenerateCustomerAdditionalInfo();
-                customer.customerOrderIds = new List<long>();
+                customer.customerOrders = new List<CustomerOrder>();
                 customers.Add(customer);
             }
 
