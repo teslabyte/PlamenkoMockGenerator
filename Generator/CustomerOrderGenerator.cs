@@ -7,7 +7,7 @@
             List<CustomerOrder> customerOrders = new List<CustomerOrder>();
 
             OrderDateGenerator odgen = new OrderDateGenerator();
-            OrderNameGenerator ongen = new OrderNameGenerator();
+            OrderItemGenerator oigen = new OrderItemGenerator();
             OrderQuantityGenerator oqgen = new OrderQuantityGenerator();
 
             for (int i = 0; i < totalOrders; i++)
@@ -21,7 +21,7 @@
                 order.deliveredDate = dates[1];
                 order.paidDate = dates[2];
 
-                order.orderName = ongen.GenerateOrderName();
+                order.orderItem = oigen.GenerateOrderItem();
                 order.orderQuantity = oqgen.GenerateOrderQuantity();
 
                 customerOrders.Add(order);
