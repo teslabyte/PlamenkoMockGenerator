@@ -34,7 +34,7 @@ foreach(Customer customer in customers)
 {
     foreach(CustomerOrder cOrders in customer.customerOrders)
     {
-        if (cOrders.deliveredDate == "-") customer.delivered = false;
+        if (cOrders.deliveredDate == -1) customer.delivered = false;
     }
 }
 

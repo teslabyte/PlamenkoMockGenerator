@@ -15,7 +15,7 @@
                 CustomerOrder order = new CustomerOrder();
                 order.orderId = i+1;
 
-                string[] dates = odgen.GenerateOrderDates();
+                long[] dates = odgen.GenerateOrderDates();
 
                 order.orderedDate = dates[0];
                 order.deliveredDate = dates[1];
